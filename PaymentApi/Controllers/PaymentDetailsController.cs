@@ -162,7 +162,7 @@ namespace PaymentApi.Controllers
             return Ok(paymentDetailsDto);   
         }
         [HttpGet("SearchUser")]
-        public async Task<ActionResult<IEnumerable<PaymentDetailDto>>> SearchUser( int pageIndex, int pageSize, string name = "", int cardNumber = 0)
+        public async Task<ActionResult<IEnumerable<PaymentDetailDto>>> SearchUser([FromQuery] int pageIndex=1, [FromQuery] int pageSize =10, [FromQuery] string name = "", [FromQuery] int cardNumber = 0)
         {
             var parameters = new MyStoredProcedure
             {

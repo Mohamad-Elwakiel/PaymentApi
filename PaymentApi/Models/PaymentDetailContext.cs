@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Data;
 
 namespace PaymentApi.Models
 {
@@ -28,7 +29,7 @@ namespace PaymentApi.Models
             var parameters = new[]
             {
             new SqlParameter("@Name", spParams.Name),
-            new SqlParameter("@CardNumber", spParams.CardNumber),
+            new SqlParameter("@CardNumber", spParams.CardNumber){ DbType = DbType.String, Size = 16 },
             new SqlParameter("@PageIndex", spParams.PageIndex),
             new SqlParameter("@PageSize", spParams.PageSize)
         };
