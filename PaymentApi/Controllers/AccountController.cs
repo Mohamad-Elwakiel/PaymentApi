@@ -52,12 +52,23 @@ namespace PaymentApi.Controllers
         {
             var loginModel = _mapper.Map<LoginModel>(loginModelDto);
             var result = await _accountRepository.LoginAsync(loginModel);
-            if (string.IsNullOrEmpty(result))
+            if (result==null)
+            {
+                return Unauthorized();
+            }
+           
+            return Ok(result);
+
+        }
+        [HttpPost("RefreshToken")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenModel refreshToken)
+        {
+            var result = await _accountRepository.RefreshTokenAsync(refreshToken);
+            if (result == null)
             {
                 return Unauthorized();
             }
             return Ok(result);
-
         }
         [HttpPost("ForgotPassword")]
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto forgotPassword)
